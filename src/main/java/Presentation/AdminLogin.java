@@ -2,6 +2,8 @@ package Presentation;
 
 import java.awt.BorderLayout;
 import java.awt.EventQueue;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
@@ -16,25 +18,7 @@ public class AdminLogin extends JFrame {
 	private JTextField usernameField;
 	private JTextField passwordField;
 
-	/**
-	 * Launch the application.
-	 */
-	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					Login frame = new Login();
-					frame.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
-	}
 
-	/**
-	 * Create the frame.
-	 */
 	public AdminLogin() {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 450, 300);
@@ -46,6 +30,13 @@ public class AdminLogin extends JFrame {
 		JButton loginButton = new JButton("Login");
 		loginButton.setBounds(167, 227, 89, 23);
 		contentPane.add(loginButton);
+		loginButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e)
+			{
+				setVisible(false);
+				new AdminView().setVisible(true);
+			}
+		});
 		
 		usernameField = new JTextField();
 		usernameField.setBounds(170, 90, 86, 20);

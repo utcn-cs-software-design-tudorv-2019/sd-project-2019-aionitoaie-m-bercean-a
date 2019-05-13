@@ -17,22 +17,6 @@ public class ParkingDetails extends JFrame {
 	private JTextField startField;
 	private JTextField durationField;
 
-	/**
-	 * Launch the application.
-	 */
-	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					ParkingDetails frame = new ParkingDetails();
-					frame.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
-	}
-
 
 	/*
 	 * TODO

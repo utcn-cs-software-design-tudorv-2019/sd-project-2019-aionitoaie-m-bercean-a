@@ -11,28 +11,14 @@ import java.awt.GridBagLayout;
 import javax.swing.JButton;
 import java.awt.GridBagConstraints;
 import java.awt.Insets;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.FlowLayout;
 import javax.swing.JTextField;
 
 public class PlotsView extends JFrame {
 
 	private JPanel contentPane;
-
-	/**
-	 * Launch the application.
-	 */
-	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					PlotsView frame = new PlotsView();
-					frame.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
-	}
 
 
 	public PlotsView() {
@@ -65,6 +51,13 @@ public class PlotsView extends JFrame {
 		
 		JButton btnBookPlot = new JButton("BookPlot");
 		contentPane.add(btnBookPlot);
+		btnBookPlot.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e)
+			{
+				setVisible(false);
+				new PersonView().setVisible(true);
+			}
+		});
 	}
 
 }

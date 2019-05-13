@@ -2,10 +2,14 @@ package Presentation;
 
 import java.awt.BorderLayout;
 import java.awt.EventQueue;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
+
+
 import javax.swing.JButton;
 import javax.swing.JTextField;
 import javax.swing.JLabel;
@@ -43,17 +47,38 @@ public class Login extends JFrame {
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
 		
-		JButton admingLogInButton = new JButton("Log as admin");
-		admingLogInButton.setBounds(10, 227, 110, 23);
-		contentPane.add(admingLogInButton);
+		JButton adminLogInButton = new JButton("Log as admin");
+		adminLogInButton.setBounds(10, 227, 110, 23);
+		contentPane.add(adminLogInButton);
+		adminLogInButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e)
+			{
+				setVisible(false);
+				new AdminLogin().setVisible(true);
+			}
+		});
 		
 		JButton loginButton = new JButton("Login");
 		loginButton.setBounds(167, 227, 89, 23);
 		contentPane.add(loginButton);
+		loginButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e)
+			{
+				setVisible(false);
+				new PersonView().setVisible(true);
+			}
+		});
 		
 		JButton registerButton = new JButton("Register");
 		registerButton.setBounds(318, 227, 89, 23);
 		contentPane.add(registerButton);
+		registerButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e)
+			{
+				setVisible(false);
+				new Register().setVisible(true);
+			}
+		});
 		
 		usernameField = new JTextField();
 		usernameField.setBounds(170, 90, 86, 20);

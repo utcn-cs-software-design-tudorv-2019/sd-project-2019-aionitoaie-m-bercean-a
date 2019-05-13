@@ -2,6 +2,8 @@ package Presentation;
 
 import java.awt.BorderLayout;
 import java.awt.EventQueue;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
@@ -20,24 +22,10 @@ public class PersonView extends JFrame {
 	private JTextField emailField;
 	private JTextField userField;
 
-	/**
-	 * Launch the application.
-	 */
-	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					PersonView frame = new PersonView();
-					frame.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
-	}
-
-	/**
-	 * Create the frame.
+	/*
+	 * TODO
+	 * JTextField edit = false
+	 * 
 	 */
 	public PersonView() {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -50,6 +38,13 @@ public class PersonView extends JFrame {
 		JButton editButton = new JButton("Edit");
 		editButton.setBounds(335, 11, 89, 23);
 		contentPane.add(editButton);
+		editButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e)
+			{
+				setVisible(false);
+				new EditData().setVisible(true);
+			}
+		});
 		
 		JLabel lblName = new JLabel("name");
 		lblName.setBounds(10, 15, 46, 14);
@@ -74,10 +69,24 @@ public class PersonView extends JFrame {
 		JButton btnAddCar = new JButton("Add Car");
 		btnAddCar.setBounds(10, 227, 89, 23);
 		contentPane.add(btnAddCar);
+		btnAddCar.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e)
+			{
+				setVisible(false);
+				new AddCar().setVisible(true);
+			}
+		});
 		
 		JButton btnBookSpace = new JButton("Book Space");
-		btnBookSpace.setBounds(109, 227, 89, 23);
+		btnBookSpace.setBounds(109, 227, 118, 23);
 		contentPane.add(btnBookSpace);
+		btnBookSpace.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e)
+			{
+				setVisible(false);
+				new SelectParking().setVisible(true);
+			}
+		});
 		
 		nameField = new JTextField();
 		nameField.setBounds(68, 12, 86, 20);
@@ -107,5 +116,13 @@ public class PersonView extends JFrame {
 		JComboBox carsComboBox = new JComboBox();
 		carsComboBox.setBounds(335, 117, 89, 22);
 		contentPane.add(carsComboBox);
+		/*
+		 * TODO
+		 * populate combo box
+		 * List<String> ls = new ArrayList<String>(); 
+		 * carsComboBox.setModel(new DefaultComboBoxModel(ls.toArray()));
+		 * 
+		 */
+		
 	}
 }
