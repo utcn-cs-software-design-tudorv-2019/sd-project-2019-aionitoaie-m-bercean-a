@@ -1,20 +1,27 @@
-import java.util.List;
- 
 import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.cfg.AnnotationConfiguration;
 import org.junit.Test;
 
+import Model.Entities.Admin;
 import Model.Entities.Car;
+import Model.Entities.Parking;
 import Model.Entities.Person;
+import Model.Entities.Plot;
+import Model.Repositories.AdminCRUD;
 import Model.Repositories.CarCRUD;
+import Model.Repositories.ParkingCRUD;
 import Model.Repositories.PersonCRUD;
+import Model.Repositories.PlotCRUD;
  
 public class Runner {
 	
 	PersonCRUD personCRUD = new PersonCRUD();
-	CarCRUD carCRUD = new CarCRUD();	
+	CarCRUD carCRUD = new CarCRUD();
+	ParkingCRUD parkCRUD = new ParkingCRUD();
+	PlotCRUD plotCRUD = new PlotCRUD();
+	AdminCRUD adminCRUD = new AdminCRUD();
      
     @Test
     public void crud() {
@@ -34,23 +41,126 @@ public class Runner {
     }
     
     private void create() {
+    	
+    	/*
+    	 * --Creation Flow--
+    	 * 
+    	 * Create Person
+    	 * Create Parkings
+    	 * 
+    	 * Create Car
+    	 * Assign Owner to a Car
+    	 * 
+    	 * Create Admin
+    	 * Assign a Parking to an Admin
+    	 * 
+    	 * Create Plot
+    	 * Assign a Parking to a Plot
+    	 * 
+    	 * ???
+    	 * 
+    	 * Profit
+    	 * 
+    	 * 
+    	 */
         
+    	/*
+    	 * Creating Persons
+    	 */
+    	
     	Person p1 = new Person("str1","ion","123","email1","qwe","qwe");
     	Person p2 = new Person("str2","andrei","1234","email2","asd","asd");
+    	Person p3 = new Person("str3","vasile","12345","email3","zxc","zxc");
     	
     	personCRUD.create(p1);
     	personCRUD.create(p2);
     	
-    	Car c1 = new Car("mondeo",2012);
-    	c1.setPerson(p1);
-    	Car c2 = new Car("lambo",2011);
-    	c2.setPerson(p1);
+    	/*
+    	 * Creating Parkings
+    	 */
     	
+    	Parking park1 = new Parking();
+    	Parking park2 = new Parking();
+    	
+    	parkCRUD.create(park1);
+    	parkCRUD.create(park2);
+    	
+    	/*
+    	 * Creating Cars
+    	 */
+    	
+    	Car c1 = new Car("mondeo",2012);
+    	Car c2 = new Car("lambo",2011);
+    	Car c3 = new Car("bmw",2014);
+    	Car c4 = new Car("dacia",2001);
+    	Car c5 = new Car("trabant",1989);
+    	
+    	//Assign owner to a car
+    	c1.setPerson(p2);
+    	c2.setPerson(p1);c4.setPerson(p1);
+    	c3.setPerson(p3);c5.setPerson(p3);
     	
     	carCRUD.create(c1);
     	carCRUD.create(c2);
+    	carCRUD.create(c3);
+    	carCRUD.create(c4);
+    	carCRUD.create(c5);
+    	
+    	/*
+    	 * Creating Admins
+    	 */
+
+    	Admin a1 = new Admin ("admin1","admin","admin");
+    	Admin a2 = new Admin("admin2","adminn","adminn");
+    	
+    	//Assign parking to admin
+    	a1.setParking(park2);
+    	park2.setAdminName(a1.getName());
+    	a2.setParking(park1);
+    	park1.setAdminName(a2.getName());
+    	
+    	adminCRUD.create(a1);
+    	adminCRUD.create(a2);
+    	
+    	/*
+    	 * Creating Plots
+    	 */
+    	
+    	Plot pl1 = new Plot(5,10,3,false,100);
+    	Plot pl2 = new Plot(7,5,2,false,50);
+    	Plot pl3 = new Plot(9,10,3,true,100);
+    	Plot pl4 = new Plot(10,13,4,false,100);
+    	Plot pl5 = new Plot(12,8,5,false,50);
+    	Plot pl6 = new Plot(15,16,1,true,50);
+    	Plot pl7 = new Plot(16,13,1,false,100);
+    	Plot pl8 = new Plot(20,15,4,false,50);
+    	Plot pl9 = new Plot(27,18,1,true,100);
+    	
+    	//Assign parking to plot
+    	pl1.setParking(park1);
+    	pl3.setParking(park1);
+    	pl6.setParking(park1);
+    	pl8.setParking(park1);
+    	pl9.setParking(park1);
+    	
+    	pl2.setParking(park2);
+    	pl4.setParking(park2);
+    	pl5.setParking(park2);
+    	pl7.setParking(park2);
     	
     	
+    	plotCRUD.create(pl1);
+    	plotCRUD.create(pl2);
+    	plotCRUD.create(pl3);
+    	plotCRUD.create(pl4);
+    	plotCRUD.create(pl5);
+    	plotCRUD.create(pl6);
+    	plotCRUD.create(pl7);
+    	plotCRUD.create(pl8);
+    	plotCRUD.create(pl9);
+    	
+    	
+    	// End Flow
     	
     }
     
