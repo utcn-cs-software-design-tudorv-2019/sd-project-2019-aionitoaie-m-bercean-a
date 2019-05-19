@@ -18,6 +18,15 @@ public class Admin {
 	@JoinColumn(name = "parkId")
 	private Parking parking;
 	
+	public Admin() {}
+	
+	public Admin(String name, String user, String pass)
+	{
+		this.name= name;
+		this.userA = user;
+		this.passA = pass;
+	}
+	
 	public int getAdminId() {
 		return adminId;
 	}

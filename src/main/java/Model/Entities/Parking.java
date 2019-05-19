@@ -13,6 +13,9 @@ public class Parking {
 	private int parkId;
 	private String adminName;
 	
+	public Parking() {}
+	
+	
 	public int getParkId() {
 		return parkId;
 	}

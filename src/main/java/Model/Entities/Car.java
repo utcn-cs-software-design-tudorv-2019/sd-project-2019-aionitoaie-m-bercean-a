@@ -14,7 +14,7 @@ public class Car {
 	private String model;
 	private int year;
 	
-	@ManyToOne
+	@ManyToOne(cascade = {CascadeType.ALL})
 	@JoinColumn(name = "personID")
 	private Person person;
 

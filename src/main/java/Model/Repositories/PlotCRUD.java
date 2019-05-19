@@ -44,8 +44,9 @@ public class PlotCRUD implements MasterInterface<Plot, Integer>{
 		Plot p = (Plot) session.get(Plot.class, obiect.getPlotId());
 		
 		p.setStartD(obiect.getStartD());
-		p.setEndD(obiect.getEndD());
+		p.setDuration(obiect.getDuration());
 		p.setDate(obiect.getDate());
+		p.setPrice(obiect.getPrice());
 		//p.setCar(obiect.getCar());
 		p.setOccupied(obiect.getOccupiedState());
 		
