@@ -9,8 +9,8 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
+import Control.PersonLogic;
 import Model.Entities.Person;
-import Model.Repositories.PersonCRUD;
 
 import javax.swing.JButton;
 import javax.swing.JLabel;
@@ -26,8 +26,7 @@ public class EditData extends JFrame {
 	private JTextField userField;
 	
 	private Integer userID;
-	private PersonCRUD pers;
-	private Person user;
+	private PersonLogic pers;
 
 
 	public EditData(Integer id) {
@@ -48,8 +47,7 @@ public class EditData extends JFrame {
 			public void actionPerformed(ActionEvent e)
 			{
 				setVisible(false);
-				user = pers.read(userID);
-				new PersonCRUD().update(new Person(user.getPersonID(), addrField.getText(), nameField.getText(), phoneField.getText(), emailField.getText(), userField.getText(), user.getPass()));
+				pers.updateInfo(new Person(userID, addrField.getText(), nameField.getText(), phoneField.getText(), emailField.getText(), userField.getText(), ""));
 			}
 		});
 		
