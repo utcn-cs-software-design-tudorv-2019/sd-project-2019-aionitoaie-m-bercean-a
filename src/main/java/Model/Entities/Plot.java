@@ -1,7 +1,6 @@
 package Model.Entities;
 
 import java.util.List;
-
 import javax.persistence.*;
 
 @Entity

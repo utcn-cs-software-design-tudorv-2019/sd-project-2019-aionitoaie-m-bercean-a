@@ -18,7 +18,18 @@ public class Person {
 	private String passP;
 	
 	public Person() {}
-
+	
+	public Person(int id, String address, String name, String phone, String email, String user, String pass)
+	{
+		this.personID = id;
+		this.address = address;
+		this.name = name;
+		this.phone = phone;
+		this.email = email;
+		this.userP = user;
+		this.passP = pass;
+	}
+	
 	public Person(String address, String name, String phone, String email, String user, String pass)
 	{
 		this.address = address;

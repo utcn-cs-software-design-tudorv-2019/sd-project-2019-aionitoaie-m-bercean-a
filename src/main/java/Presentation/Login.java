@@ -9,6 +9,9 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
+import Model.Entities.Admin;
+import Model.Entities.Person;
+import Model.Repositories.PersonCRUD;
 
 import javax.swing.JButton;
 import javax.swing.JTextField;
@@ -19,6 +22,9 @@ public class Login extends JFrame {
 	private JPanel contentPane;
 	private JTextField usernameField;
 	private JTextField passwordField;
+	private PersonCRUD pers;
+	private Person user;
+	private Admin admin;
 
 	/**
 	 * Launch the application.

@@ -2,10 +2,16 @@ package Presentation;
 
 import java.awt.BorderLayout;
 import java.awt.EventQueue;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
+
+import Model.Entities.Person;
+import Model.Repositories.PersonCRUD;
+
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JTextField;
@@ -18,9 +24,16 @@ public class EditData extends JFrame {
 	private JTextField phoneField;
 	private JTextField emailField;
 	private JTextField userField;
+	
+	private Integer userID;
+	private PersonCRUD pers;
+	private Person user;
 
 
-	public EditData() {
+	public EditData(Integer id) {
+		
+		userID = id;
+		
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 450, 300);
 		contentPane = new JPanel();
@@ -31,6 +44,14 @@ public class EditData extends JFrame {
 		JButton saveButton = new JButton("Save");
 		saveButton.setBounds(335, 11, 89, 23);
 		contentPane.add(saveButton);
+		saveButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e)
+			{
+				setVisible(false);
+				user = pers.read(userID);
+				new PersonCRUD().update(new Person(user.getPersonID(), addrField.getText(), nameField.getText(), phoneField.getText(), emailField.getText(), userField.getText(), user.getPass()));
+			}
+		});
 		
 		JLabel lblName = new JLabel("name");
 		lblName.setBounds(10, 15, 46, 14);

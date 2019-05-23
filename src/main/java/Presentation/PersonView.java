@@ -1,13 +1,18 @@
 package Presentation;
 
+import Model.Repositories.CarCRUD;
+
 import java.awt.BorderLayout;
 import java.awt.EventQueue;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
+import javax.swing.DefaultComboBoxModel;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JTextField;
@@ -21,13 +26,21 @@ public class PersonView extends JFrame {
 	private JTextField phoneField;
 	private JTextField emailField;
 	private JTextField userField;
-
-	/*
-	 * TODO
-	 * JTextField edit = false
-	 * 
-	 */
-	public PersonView() {
+	
+	private Integer userID;
+	
+	private CarCRUD car;
+	
+	public PersonView( final Integer id) {
+		
+		userID = id;
+		
+		nameField.setEditable(false);
+		addrField.setEditable(false);
+		phoneField.setEditable(false);
+		emailField.setEditable(false);
+		userField.setEditable(false);
+		
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 450, 300);
 		contentPane = new JPanel();
@@ -42,7 +55,7 @@ public class PersonView extends JFrame {
 			public void actionPerformed(ActionEvent e)
 			{
 				setVisible(false);
-				new EditData().setVisible(true);
+				new EditData(id).setVisible(true);
 			}
 		});
 		
@@ -116,13 +129,7 @@ public class PersonView extends JFrame {
 		JComboBox carsComboBox = new JComboBox();
 		carsComboBox.setBounds(335, 117, 89, 22);
 		contentPane.add(carsComboBox);
-		/*
-		 * TODO
-		 * populate combo box
-		 * List<String> ls = new ArrayList<String>(); 
-		 * carsComboBox.setModel(new DefaultComboBoxModel(ls.toArray()));
-		 * 
-		 */
-		
+		List<String> ls = new ArrayList<String>();
+		carsComboBox.setModel(new DefaultComboBoxModel(ls.toArray()));
 	}
 }
