@@ -6,14 +6,15 @@ import org.hibernate.cfg.AnnotationConfiguration;
 
 import Model.Entities.Person;
 import Model.Entities.Plot;
+import Model.Entities.PlotDetail;
 
-public class PlotCRUD implements MasterInterface<Plot, Integer>{
+public class PlotDetailCRUD implements MasterInterface<PlotDetail, Integer>{
 	
 	SessionFactory sessionFactory = new AnnotationConfiguration().configure().buildSessionFactory();
     Session session;
 
-	public void create(Plot obiect) {
-		System.out.println("Creating new plot record...");
+	public void create(PlotDetail obiect) {
+		System.out.println("Creating new plot detail record...");
 		session = sessionFactory.openSession();
 		
 		session.beginTransaction();
@@ -24,31 +25,37 @@ public class PlotCRUD implements MasterInterface<Plot, Integer>{
 		
 	}
 
-	public Plot read(Integer idObiect) {
-		Plot p;
+	public PlotDetail read(Integer idObiect) {
+		PlotDetail p;
 		
-		System.out.println("Reading plot record...");
+		System.out.println("Reading plot detail record...");
 		session = sessionFactory.openSession();
 
-		p = (Plot)session.get(Plot.class, idObiect);
+		p = (PlotDetail)session.get(PlotDetail.class, idObiect);
 		
 		session.close();
 		
 		return p;
 	}
 
-	public void update(Plot obiect) {
-		System.out.println("Updating plot...");
+	public void update(PlotDetail obiect) {
+		System.out.println("Updating plot detail...");
 		session = sessionFactory.openSession();
 		
-		Plot p = (Plot) session.get(Plot.class, obiect.getPlotId());
+		PlotDetail p = (PlotDetail) session.get(PlotDetail.class, obiect.getPlotDetailId());
 		
 		//p.setStartD(obiect.getStartD());
 		//p.setDuration(obiect.getDuration());
 		//p.setDate(obiect.getDate());
-		p.setPrice(obiect.getPrice());
+		//p.setPrice(obiect.getPrice());
 		//p.setCar(obiect.getCar());
 		//p.setOccupied(obiect.getOccupiedState());
+		
+		p.setDate(obiect.getDate());
+		p.setEndHour(obiect.getEndHour());
+		p.setOccupied(obiect.isOccupied());
+		p.setStartHour(obiect.getStartHour());
+		p.setPlot(obiect.getPlot());
 		
 		session.beginTransaction();
 		session.saveOrUpdate(p);
@@ -59,10 +66,10 @@ public class PlotCRUD implements MasterInterface<Plot, Integer>{
 	}
 
 	public void delete(Integer idObiect) {
-		System.out.println("Deleting plot record...");
+		System.out.println("Deleting plot detail record...");
 		session = sessionFactory.openSession();
 		
-		Plot p = (Plot) session.get(Plot.class, idObiect);
+		PlotDetail p = (PlotDetail) session.get(PlotDetail.class, idObiect);
 		
 		
 		session.beginTransaction();

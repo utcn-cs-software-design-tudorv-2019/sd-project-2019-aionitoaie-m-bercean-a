@@ -9,11 +9,13 @@ import Model.Entities.Car;
 import Model.Entities.Parking;
 import Model.Entities.Person;
 import Model.Entities.Plot;
+import Model.Entities.PlotDetail;
 import Model.Repositories.AdminCRUD;
 import Model.Repositories.CarCRUD;
 import Model.Repositories.ParkingCRUD;
 import Model.Repositories.PersonCRUD;
 import Model.Repositories.PlotCRUD;
+import Model.Repositories.PlotDetailCRUD;
  
 public class Runner {
 	
@@ -22,6 +24,7 @@ public class Runner {
 	ParkingCRUD parkCRUD = new ParkingCRUD();
 	PlotCRUD plotCRUD = new PlotCRUD();
 	AdminCRUD adminCRUD = new AdminCRUD();
+	PlotDetailCRUD plotDetailCRUD = new PlotDetailCRUD();
      
     @Test
     public void crud() {
@@ -74,6 +77,7 @@ public class Runner {
     	
     	personCRUD.create(p1);
     	personCRUD.create(p2);
+    	personCRUD.create(p3);
     	
     	/*
     	 * Creating Parkings
@@ -126,15 +130,25 @@ public class Runner {
     	 * Creating Plots
     	 */
     	
-    	Plot pl1 = new Plot(5,10,3,false,100);
-    	Plot pl2 = new Plot(7,5,2,false,50);
-    	Plot pl3 = new Plot(9,10,3,true,100);
-    	Plot pl4 = new Plot(10,13,4,false,100);
-    	Plot pl5 = new Plot(12,8,5,false,50);
-    	Plot pl6 = new Plot(15,16,1,true,50);
-    	Plot pl7 = new Plot(16,13,1,false,100);
-    	Plot pl8 = new Plot(20,15,4,false,50);
-    	Plot pl9 = new Plot(27,18,1,true,100);
+//    	Plot pl1 = new Plot(5,10,3,false,100);
+//    	Plot pl2 = new Plot(7,5,2,false,50);
+//    	Plot pl3 = new Plot(9,10,3,true,100);
+//    	Plot pl4 = new Plot(10,13,4,false,100);
+//    	Plot pl5 = new Plot(12,8,5,false,50);
+//    	Plot pl6 = new Plot(15,16,1,true,50);
+//    	Plot pl7 = new Plot(16,13,1,false,100);
+//    	Plot pl8 = new Plot(20,15,4,false,50);
+//    	Plot pl9 = new Plot(27,18,1,true,100);
+    	
+       	Plot pl1 = new Plot(100);
+    	Plot pl2 = new Plot(50);
+    	Plot pl3 = new Plot(100);
+    	Plot pl4 = new Plot(100);
+    	Plot pl5 = new Plot(50);
+    	Plot pl6 = new Plot(50);
+    	Plot pl7 = new Plot(100);
+    	Plot pl8 = new Plot(50);
+    	Plot pl9 = new Plot(100);  	
     	
     	//Assign parking to plot
     	pl1.setParking(park1);
@@ -159,6 +173,44 @@ public class Runner {
     	plotCRUD.create(pl8);
     	plotCRUD.create(pl9);
     	
+    	
+    	/*
+    	 * Create some reservations (PlotDetails)
+    	 * 
+    	 */
+    	
+    	//public PlotDetail(int date, int start, int end, boolean state)
+    	
+    	PlotDetail pd1 = new PlotDetail(5,8,8+3,true);
+    	PlotDetail pd2 = new PlotDetail(6,8,8+3,true);
+    	PlotDetail pd3 = new PlotDetail(7,8,8+3,true);
+    	PlotDetail pd4 = new PlotDetail(8,8,8+3,true);
+    	PlotDetail pd5 = new PlotDetail(9,8,8+3,true);
+    	PlotDetail pd6 = new PlotDetail(10,8,8+3,true);
+    	PlotDetail pd7 = new PlotDetail(11,8,8+3,true);
+    	PlotDetail pd8 = new PlotDetail(12,8,8+3,true);
+    	
+    	//assign reservation to a plot
+    	pd1.setPlot(pl1);
+    	pd2.setPlot(pl1);
+    	pd3.setPlot(pl3);
+    	pd4.setPlot(pl3);
+    	pd5.setPlot(pl7);
+    	pd6.setPlot(pl8);
+    	pd7.setPlot(pl8);
+    	pd8.setPlot(pl8);
+    	
+    	
+    	//crud them
+    	plotDetailCRUD.create(pd1);
+    	plotDetailCRUD.create(pd2);
+    	plotDetailCRUD.create(pd3);
+    	plotDetailCRUD.create(pd4);
+    	plotDetailCRUD.create(pd5);
+    	plotDetailCRUD.create(pd6);
+    	plotDetailCRUD.create(pd7);
+    	plotDetailCRUD.create(pd8);
+   
     	
     	// End Flow
     	

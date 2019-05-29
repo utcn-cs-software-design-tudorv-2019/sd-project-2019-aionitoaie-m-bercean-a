@@ -7,12 +7,16 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 
+import javax.persistence.*;
+
+@Entity
 public class PlotDetail {
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int plotDetailId;
 	
+	private int date;
 	private int startHour;
 	private int endHour;
 	private boolean occupied;
@@ -21,6 +25,24 @@ public class PlotDetail {
 	@ManyToOne(cascade = {CascadeType.ALL})
 	@JoinColumn(name = "plotId")
 	private Plot plot;
+	
+	public PlotDetail(int date, int start, int end, boolean state)
+	{
+		this.date = date;
+		startHour = start;
+		endHour = end;
+		occupied = state;
+	}
+
+
+	public int getDate() {
+		return date;
+	}
+
+
+	public void setDate(int date) {
+		this.date = date;
+	}
 
 
 	public int getPlotDetailId() {

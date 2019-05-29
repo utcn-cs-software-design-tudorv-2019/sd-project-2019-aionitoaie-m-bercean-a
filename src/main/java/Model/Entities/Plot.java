@@ -10,10 +10,10 @@ public class Plot {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int plotId;
-	private int Date;
-	private int startD;//??
-	private int duration;//??
-	private boolean occupied;//??
+	//private int Date;
+	//private int startD;
+	//private int duration;
+	//private boolean occupied;
 	private int price;
 	
 	@ManyToOne(cascade = {CascadeType.ALL})
@@ -28,12 +28,12 @@ public class Plot {
 		this.parking = parking;
 	}
 
-	public Plot(int Date, int start, int duration, boolean occupied, int price)
+	public Plot(/*int Date,*/ /*int start,*/ /*int duration,*/ /*boolean occupied,*/ int price)
 	{
-		this.Date = Date;
-		this.startD = start;
-		this.duration = duration;
-		this.occupied = occupied;
+		//this.Date = Date;
+		//this.startD = start;
+		//this.duration = duration;
+		//this.occupied = occupied;
 		this.price = price;
 	}
 	
@@ -43,19 +43,19 @@ public class Plot {
 	public void setPlotId(int plotId) {
 		this.plotId = plotId;
 	}
-	public int getStartD() {
+	/*public int getStartD() {
 		return startD;
 	}
 	public void setStartD(int startD) {
 		this.startD = startD;
-	}
-	public int getDuration() {
+	}*/
+	/*public int getDuration() {
 		return duration;
 	}
 	public void setDuration(int duration) {
 		this.duration = duration;
-	}
-	public boolean isOccupied() {
+	}*/
+	/*public boolean isOccupied() {
 		return occupied;
 	}
 	public void setOccupied(boolean occupied) {
@@ -65,13 +65,13 @@ public class Plot {
 	public boolean getOccupiedState()
 	{
 		return this.occupied;
-	}
-	public int getDate() {
+	}*/
+	/*public int getDate() {
 		return Date;
 	}
 	public void setDate(int date) {
 		Date = date;
-	}
+	}*/
 	public int getPrice() {
 		return price;
 	}
