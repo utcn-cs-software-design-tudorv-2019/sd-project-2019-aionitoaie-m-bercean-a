@@ -6,6 +6,9 @@ import java.awt.EventQueue;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
+
+import Model.Entities.Admin;
+
 import javax.swing.JButton;
 import javax.swing.JTextField;
 import javax.swing.JLabel;
@@ -16,9 +19,12 @@ import java.awt.event.ActionListener;
 public class AdminView extends JFrame {
 
 	private JPanel contentPane;
+	private Admin admin;
 
 	
-	public AdminView() {
+	public AdminView(Admin a) {
+		admin = a;
+		
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 450, 300);
 		contentPane = new JPanel();

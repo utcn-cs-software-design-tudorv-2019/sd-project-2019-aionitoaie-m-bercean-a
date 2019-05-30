@@ -2,10 +2,16 @@ package Presentation;
 
 import java.awt.BorderLayout;
 import java.awt.EventQueue;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
+
+import Control.PersonControl;
+import Model.Entities.Person;
+
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JTextField;
@@ -18,9 +24,22 @@ public class EditData extends JFrame {
 	private JTextField phoneField;
 	private JTextField emailField;
 	private JTextField userField;
+	
+	private Person user;
+	private PersonControl pc;
 
-
-	public EditData() {
+	private void setInfo()
+	{
+		nameField.setText(user.getName());
+		addrField.setText(user.getAddress());
+		phoneField.setText(user.getPhone());
+		emailField.setText(user.getEmail());
+		userField.setText(user.getUser());
+	}
+	
+	public EditData(Person p) {
+		user = p;
+		
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 450, 300);
 		contentPane = new JPanel();
@@ -30,6 +49,15 @@ public class EditData extends JFrame {
 		
 		JButton saveButton = new JButton("Save");
 		saveButton.setBounds(335, 11, 89, 23);
+		saveButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				Person p = new Person(addrField.getText(),nameField.getText(),phoneField.getText(),emailField.getText(),userField.getText(),user.getPass());
+				pc.edit(p);
+				setVisible(false);
+				new PersonView(user).setVisible(true);
+			}
+			
+		});
 		contentPane.add(saveButton);
 		
 		JLabel lblName = new JLabel("name");
@@ -76,6 +104,8 @@ public class EditData extends JFrame {
 		userField.setBounds(68, 114, 86, 20);
 		contentPane.add(userField);
 		userField.setColumns(10);
+		
+		setInfo();
 	}
 
 }

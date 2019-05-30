@@ -2,15 +2,23 @@ package Presentation;
 
 import java.awt.BorderLayout;
 import java.awt.EventQueue;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
+
+import Control.PersonControl;
+import Model.Entities.Person;
+
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JTextField;
 
 public class Register extends JFrame {
+	
+	PersonControl pc = new PersonControl();
 
 	private JPanel contentPane;
 	private JTextField nameField;
@@ -31,6 +39,13 @@ public class Register extends JFrame {
 		
 		JButton registerButton = new JButton("Register");
 		registerButton.setBounds(335, 11, 89, 23);
+		registerButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				Person p = new Person(addrField.getText(),nameField.getText(),phoneField.getText(),emailField.getText(),userField.getText(),"");
+				pc.register(p);
+			}
+			
+		});
 		contentPane.add(registerButton);
 		
 		JLabel lblName = new JLabel("name");

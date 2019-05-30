@@ -4,11 +4,14 @@ import java.awt.BorderLayout;
 import java.awt.EventQueue;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.List;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
+import Control.PersonControl;
+import Model.Entities.Person;
 
 import javax.swing.JButton;
 import javax.swing.JTextField;
@@ -19,6 +22,7 @@ public class Login extends JFrame {
 	private JPanel contentPane;
 	private JTextField usernameField;
 	private JTextField passwordField;
+	private PersonControl pc;
 
 	/**
 	 * Launch the application.
@@ -64,8 +68,25 @@ public class Login extends JFrame {
 		loginButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e)
 			{
+				Person user = new Person();
+				/*List<Person> pList = pc.getAll();
+				for(Person p : pList)
+				{
+					if(p.getName() == usernameField.getText() && p.getPass() == passwordField.getText()) 
+					{
+						user = p;
+						break;
+					}
+				}*/
+				
+				if("test" == usernameField.getText() && "test" == passwordField.getText()) 
+				{
+					user = new Person("1","2","3", "4", "5","6");
+					user.setPass("none");
+					user.setPersonID(-1);
+				}
 				setVisible(false);
-				new PersonView().setVisible(true);
+				new PersonView(user).setVisible(true);
 			}
 		});
 		

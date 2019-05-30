@@ -7,6 +7,9 @@ import java.awt.EventQueue;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
+
+import Model.Entities.Person;
+
 import java.awt.GridBagLayout;
 import javax.swing.JButton;
 import java.awt.GridBagConstraints;
@@ -55,7 +58,7 @@ public class PlotsView extends JFrame {
 			public void actionPerformed(ActionEvent e)
 			{
 				setVisible(false);
-				new PersonView().setVisible(true);
+				new PersonView(new Person()).setVisible(true);
 			}
 		});
 	}

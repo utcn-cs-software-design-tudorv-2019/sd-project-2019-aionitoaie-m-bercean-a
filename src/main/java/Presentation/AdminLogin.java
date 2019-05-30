@@ -4,10 +4,16 @@ import java.awt.BorderLayout;
 import java.awt.EventQueue;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.List;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
+
+import Control.AdminControl;
+import Model.Entities.Admin;
+import Model.Entities.Person;
+
 import javax.swing.JButton;
 import javax.swing.JTextField;
 import javax.swing.JLabel;
@@ -17,6 +23,8 @@ public class AdminLogin extends JFrame {
 	private JPanel contentPane;
 	private JTextField usernameField;
 	private JTextField passwordField;
+	
+	private AdminControl ac = new AdminControl();
 
 
 	public AdminLogin() {
@@ -33,8 +41,19 @@ public class AdminLogin extends JFrame {
 		loginButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e)
 			{
+				Admin admin = new Admin();
+				List<Admin> pList = ac.getAll();
+				for(Admin p : pList)
+				{
+					if(p.getName() == usernameField.getText() && p.getPass() == passwordField.getText()) 
+					{
+						admin = p;
+						break;
+					}
+				}
+				
 				setVisible(false);
-				new AdminView().setVisible(true);
+				new AdminView(admin).setVisible(true);
 			}
 		});
 		

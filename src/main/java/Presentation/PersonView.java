@@ -4,10 +4,18 @@ import java.awt.BorderLayout;
 import java.awt.EventQueue;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
+
+import Control.CarControl;
+import Model.Entities.Car;
+import Model.Entities.Person;
+
+import javax.swing.DefaultComboBoxModel;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JTextField;
@@ -21,13 +29,22 @@ public class PersonView extends JFrame {
 	private JTextField phoneField;
 	private JTextField emailField;
 	private JTextField userField;
+	
+	private CarControl cC = new CarControl();
+	private Person user;
 
-	/*
-	 * TODO
-	 * JTextField edit = false
-	 * 
-	 */
-	public PersonView() {
+	private void setInfo()
+	{
+		nameField.setText(user.getName());
+		addrField.setText(user.getAddress());
+		phoneField.setText(user.getPhone());
+		emailField.setText(user.getEmail());
+		userField.setText(user.getUser());
+	}
+	
+	public PersonView(Person p) {
+		
+		user = p;
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 450, 300);
 		contentPane = new JPanel();
@@ -42,7 +59,7 @@ public class PersonView extends JFrame {
 			public void actionPerformed(ActionEvent e)
 			{
 				setVisible(false);
-				new EditData().setVisible(true);
+				new EditData(user).setVisible(true);
 			}
 		});
 		
@@ -73,7 +90,7 @@ public class PersonView extends JFrame {
 			public void actionPerformed(ActionEvent e)
 			{
 				setVisible(false);
-				new AddCar().setVisible(true);
+				new AddCar(user).setVisible(true);
 			}
 		});
 		
@@ -90,39 +107,45 @@ public class PersonView extends JFrame {
 		
 		nameField = new JTextField();
 		nameField.setBounds(68, 12, 86, 20);
+		nameField.setEditable(false);
 		contentPane.add(nameField);
 		nameField.setColumns(10);
 		
 		addrField = new JTextField();
 		addrField.setBounds(68, 37, 86, 20);
+		addrField.setEditable(false);
 		contentPane.add(addrField);
 		addrField.setColumns(10);
 		
 		phoneField = new JTextField();
 		phoneField.setBounds(68, 64, 86, 20);
+		phoneField.setEditable(false);
 		contentPane.add(phoneField);
 		phoneField.setColumns(10);
 		
 		emailField = new JTextField();
 		emailField.setBounds(68, 89, 86, 20);
+		emailField.setEditable(false);
 		contentPane.add(emailField);
 		emailField.setColumns(10);
 		
 		userField = new JTextField();
 		userField.setBounds(68, 114, 86, 20);
+		userField.setEditable(false);
 		contentPane.add(userField);
 		userField.setColumns(10);
 		
-		JComboBox carsComboBox = new JComboBox();
+		JComboBox<Car> carsComboBox = new JComboBox();
 		carsComboBox.setBounds(335, 117, 89, 22);
 		contentPane.add(carsComboBox);
-		/*
-		 * TODO
-		 * populate combo box
-		 * List<String> ls = new ArrayList<String>(); 
-		 * carsComboBox.setModel(new DefaultComboBoxModel(ls.toArray()));
-		 * 
+
+		 /*List<Car> all = cC.getAll();
+		 List<String> ls = new ArrayList<String>();
+		 for(Car c : all)
+			 if(c.getPerson().getPersonID() == user.getPersonID())
+				 ls.add(c.toString());
+		 carsComboBox.setModel(new DefaultComboBoxModel<Car>((Car[]) all.toArray()));
 		 */
-		
+		 setInfo();
 	}
 }

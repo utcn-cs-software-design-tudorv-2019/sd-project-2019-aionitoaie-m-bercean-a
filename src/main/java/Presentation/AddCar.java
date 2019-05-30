@@ -2,10 +2,17 @@ package Presentation;
 
 import java.awt.BorderLayout;
 import java.awt.EventQueue;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
+
+import Control.CarControl;
+import Model.Entities.Car;
+import Model.Entities.Person;
+
 import javax.swing.JTextField;
 import javax.swing.JLabel;
 import javax.swing.JButton;
@@ -15,9 +22,12 @@ public class AddCar extends JFrame {
 	private JPanel contentPane;
 	private JTextField nameField;
 	private JTextField yearField;
+	private CarControl cC = new CarControl();
+	private Person user;
 
 
-	public AddCar() {
+	public AddCar(Person p) {
+		user = p;
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 450, 300);
 		contentPane = new JPanel();
@@ -45,6 +55,16 @@ public class AddCar extends JFrame {
 		
 		JButton btnRegister = new JButton("Register ");
 		btnRegister.setBounds(165, 185, 89, 23);
+		btnRegister.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				Car c = new Car(nameField.getText(),Integer.parseInt(yearField.getText()));
+				c.setPerson(user);
+				cC.register(c);
+				setVisible(false);
+				new PersonView(user).setVisible(true);
+			}
+			
+		});
 		contentPane.add(btnRegister);
 	}
 
