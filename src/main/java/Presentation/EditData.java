@@ -53,6 +53,7 @@ public class EditData extends JFrame {
 			public void actionPerformed(ActionEvent arg0) {
 				Person p = new Person(addrField.getText(),nameField.getText(),phoneField.getText(),emailField.getText(),userField.getText(),user.getPass());
 				pc.edit(p);
+				user = pc.getPerson(user);
 				setVisible(false);
 				new PersonView(user).setVisible(true);
 			}

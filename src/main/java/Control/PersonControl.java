@@ -14,6 +14,11 @@ public class PersonControl {
 		return pCRUD.selectAll();
 	}
 	
+	public Person getPerson(Person p)
+	{
+		return pCRUD.read(p.getPersonID());
+	}
+	
 	public void edit(Person p)
 	{
 		pCRUD.update(p);
