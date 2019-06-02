@@ -5,7 +5,7 @@ import java.util.List;
 import javax.persistence.*;
 
 @Entity
-public class Plot {
+public class Plot implements Comparable<Plot> {
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -36,6 +36,8 @@ public class Plot {
 		//this.occupied = occupied;
 		this.price = price;
 	}
+	
+	public Plot() {}
 	
 	public int getPlotId() {
 		return plotId;
@@ -77,6 +79,11 @@ public class Plot {
 	}
 	public void setPrice(int price) {
 		this.price = price;
+	}
+	
+	public int compareTo(Plot o)
+	{
+		return Integer.compare(this.getPlotId(), o.getPlotId());
 	}
 
 }

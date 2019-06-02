@@ -1,24 +1,19 @@
 package Presentation;
 
-import java.awt.BorderLayout;
-import java.awt.EventQueue;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+import javax.swing.JButton;
 import javax.swing.JFrame;
+import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.JTextField;
 import javax.swing.border.EmptyBorder;
 
-import Control.PersonControl;
 import Model.Entities.Person;
-
-import javax.swing.JButton;
-import javax.swing.JLabel;
-import javax.swing.JTextField;
+import Model.Repositories.PersonCRUD;
 
 public class Register extends JFrame {
-	
-	PersonControl pc = new PersonControl();
 
 	private JPanel contentPane;
 	private JTextField nameField;
@@ -26,9 +21,24 @@ public class Register extends JFrame {
 	private JTextField phoneField;
 	private JTextField emailField;
 	private JTextField userField;
-	private JTextField textField;
+	private JTextField passField;
+	PersonCRUD personCRUD = new PersonCRUD();
 
 
+	public void saveNewUser()
+	{
+		Person p = new Person(
+				addrField.getText(),
+				nameField.getText(),
+				phoneField.getText(),
+				emailField.getText(),
+				userField.getText(),
+				passField.getText()
+				);
+
+		personCRUD.create(p);
+	}
+	
 	public Register() {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 450, 300);
@@ -39,14 +49,16 @@ public class Register extends JFrame {
 		
 		JButton registerButton = new JButton("Register");
 		registerButton.setBounds(335, 11, 89, 23);
-		registerButton.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent arg0) {
-				Person p = new Person(addrField.getText(),nameField.getText(),phoneField.getText(),emailField.getText(),userField.getText(),"");
-				pc.register(p);
-			}
-			
-		});
 		contentPane.add(registerButton);
+		registerButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e)
+			{
+				saveNewUser();
+				setVisible(false);
+				Login frame = new Login();
+				frame.setVisible(true);
+			}
+		});
 		
 		JLabel lblName = new JLabel("name");
 		lblName.setBounds(10, 15, 46, 14);
@@ -97,10 +109,10 @@ public class Register extends JFrame {
 		lblNewLabel.setBounds(8, 146, 46, 14);
 		contentPane.add(lblNewLabel);
 		
-		textField = new JTextField();
-		textField.setBounds(68, 145, 86, 20);
-		contentPane.add(textField);
-		textField.setColumns(10);
+		passField = new JTextField();
+		passField.setBounds(68, 145, 86, 20);
+		contentPane.add(passField);
+		passField.setColumns(10);
 	}
 
 }

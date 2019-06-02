@@ -1,9 +1,5 @@
 package Model.Repositories;
 
-import java.util.ArrayList;
-import java.util.List;
-
-import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.cfg.AnnotationConfiguration;
@@ -27,15 +23,6 @@ public class AdminCRUD implements MasterInterface<Admin, Integer>{
 		
 	}
 
-	@SuppressWarnings("unchecked")
-	public List<Admin> selectAll(){
-		session = sessionFactory.openSession();
-		
-		Query q = session.createQuery("SELECT * FROM Admin");
-		List<Admin> a = q.list();
-		return a;
-	}
-	
 	public Admin read(Integer idObiect) {
 		Admin a;
 		

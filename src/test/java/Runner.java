@@ -60,6 +60,9 @@ public class Runner {
     	 * Create Plot
     	 * Assign a Parking to a Plot
     	 * 
+    	 * 
+    	 * Create PlotDetail
+    	 * Assign PlotDetail to Plot (reservation)
     	 * ???
     	 * 
     	 * Profit
@@ -130,16 +133,7 @@ public class Runner {
     	 * Creating Plots
     	 */
     	
-//    	Plot pl1 = new Plot(5,10,3,false,100);
-//    	Plot pl2 = new Plot(7,5,2,false,50);
-//    	Plot pl3 = new Plot(9,10,3,true,100);
-//    	Plot pl4 = new Plot(10,13,4,false,100);
-//    	Plot pl5 = new Plot(12,8,5,false,50);
-//    	Plot pl6 = new Plot(15,16,1,true,50);
-//    	Plot pl7 = new Plot(16,13,1,false,100);
-//    	Plot pl8 = new Plot(20,15,4,false,50);
-//    	Plot pl9 = new Plot(27,18,1,true,100);
-    	
+
        	Plot pl1 = new Plot(100);
     	Plot pl2 = new Plot(50);
     	Plot pl3 = new Plot(100);

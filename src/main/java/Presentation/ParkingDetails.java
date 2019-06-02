@@ -1,14 +1,22 @@
 package Presentation;
 
-import java.awt.BorderLayout;
-import java.awt.EventQueue;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.util.ArrayList;
 
-import javax.swing.JFrame;
-import javax.swing.JPanel;
-import javax.swing.border.EmptyBorder;
-import javax.swing.JLabel;
-import javax.swing.JTextField;
 import javax.swing.JButton;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
+import javax.swing.JTextField;
+import javax.swing.border.EmptyBorder;
+
+import Control.UserBLL;
+import Model.Entities.Car;
+import Model.Entities.Parking;
+import Model.Entities.Person;
+import Model.Entities.Plot;
+import Model.Entities.PlotDetail;
 
 public class ParkingDetails extends JFrame {
 
@@ -16,20 +24,30 @@ public class ParkingDetails extends JFrame {
 	private JTextField dateField;
 	private JTextField startField;
 	private JTextField durationField;
+	Person person;
+	Car car;
+	PlotDetail plotDetail;
+	UserBLL uBLL = new UserBLL();
+	ArrayList<Plot> plots ;
 
-
-	/*
-	 * TODO
-	 * Data = 1-31 (ziua)
-	 * Start = ora start 6-20
-	 * No of Hours = durata de parcare
-	 * 
-	 * 6 < Start < 20 && 6 < Start + No of Hours < 20 
-	 * 
-	 * + verificare ca toate sa fie int nu string
-	 * 
-	 */
-	public ParkingDetails() {
+	public void getPlots(Parking parking)
+	{
+		plots = uBLL.getPlotsByParkingId(parking);
+	}
+	
+	public void createPlotDetails()
+	{
+		int data = Integer.parseInt(dateField.getText());
+		int start = Integer.parseInt(startField.getText());
+		int end = start + Integer.parseInt(durationField.getText());
+		
+		plotDetail = new PlotDetail(data,start,end,true);//check if available
+		
+	}
+	
+	public ParkingDetails(Person p, Car c) {
+		person = p;
+		car = c;
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 450, 300);
 		contentPane = new JPanel();
@@ -67,6 +85,20 @@ public class ParkingDetails extends JFrame {
 		JButton btnSelectSlot = new JButton("Select Slot");
 		btnSelectSlot.setBounds(163, 201, 89, 23);
 		contentPane.add(btnSelectSlot);
+		btnSelectSlot.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e)
+			{
+				createPlotDetails();
+				
+				if(uBLL.checkPlotDetails(plotDetail)) {
+					setVisible(false);
+					PlotsView plotsView = new PlotsView(person,car);
+					plotsView.checkAvailablePlots(plots,plotDetail);
+					plotsView.setVisible(true);
+				}
+
+			}
+		});
 	}
 
 }

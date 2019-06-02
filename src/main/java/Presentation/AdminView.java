@@ -1,30 +1,39 @@
 package Presentation;
 
-import java.awt.BorderLayout;
-import java.awt.EventQueue;
-
-import javax.swing.JFrame;
-import javax.swing.JPanel;
-import javax.swing.border.EmptyBorder;
-
-import Model.Entities.Admin;
-
-import javax.swing.JButton;
-import javax.swing.JTextField;
-import javax.swing.JLabel;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
+
+import javax.swing.JButton;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
+import javax.swing.JTable;
+import javax.swing.border.EmptyBorder;
+
+import Control.AdminBLL;
+import Model.Entities.Person;
+import net.proteanit.sql.DbUtils;
 
 public class AdminView extends JFrame {
 
 	private JPanel contentPane;
-	private Admin admin;
+	AdminBLL adminBLL = new AdminBLL();
 
 	
-	public AdminView(Admin a) {
-		admin = a;
+	public boolean checkCredentials(String user, String pass)
+	{
 		
+		if(adminBLL.checkAdminCredentials(user,pass))
+		{
+			return true;
+		}
+		
+		return false;
+	}
+	
+	public AdminView() {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 450, 300);
 		contentPane = new JPanel();
@@ -38,8 +47,12 @@ public class AdminView extends JFrame {
 		btnViewUsers.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e)
 			{
-				setVisible(false);
-				//TODO
+				//setVisible(false);
+				AdminViewUsers adminViewUsers = new AdminViewUsers();
+				adminViewUsers.populateTable();
+				adminViewUsers.setVisible(true);
+				adminViewUsers.setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
+				
 			}
 		});
 		
@@ -49,8 +62,11 @@ public class AdminView extends JFrame {
 		btnViewBookings.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e)
 			{
-				setVisible(false);
-				//TODO
+				//setVisible(false);
+				AdminViewBookings adminViewBookings = new AdminViewBookings();
+				adminViewBookings.populateTable();
+				adminViewBookings.setVisible(true);
+				adminViewBookings.setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
 			}
 		});
 		
@@ -65,7 +81,8 @@ public class AdminView extends JFrame {
 			}
 		});
 		
-		JLabel lblNewLabel_1 = new JLabel("Hello Admin");
+		JLabel lblNewLabel_1 = new JLabel("\r\n" + 
+				"Привет, товарищ");
 		lblNewLabel_1.setFont(new Font("Times New Roman", Font.BOLD, 18));
 		lblNewLabel_1.setBounds(163, 11, 145, 43);
 		contentPane.add(lblNewLabel_1);

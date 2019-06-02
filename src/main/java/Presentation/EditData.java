@@ -1,20 +1,17 @@
 package Presentation;
 
-import java.awt.BorderLayout;
-import java.awt.EventQueue;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+import javax.swing.JButton;
 import javax.swing.JFrame;
+import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.JTextField;
 import javax.swing.border.EmptyBorder;
 
-import Control.PersonControl;
 import Model.Entities.Person;
-
-import javax.swing.JButton;
-import javax.swing.JLabel;
-import javax.swing.JTextField;
+import Model.Repositories.PersonCRUD;
 
 public class EditData extends JFrame {
 
@@ -24,21 +21,35 @@ public class EditData extends JFrame {
 	private JTextField phoneField;
 	private JTextField emailField;
 	private JTextField userField;
+	Person person;
+	PersonCRUD personCRUD = new PersonCRUD();
 	
-	private Person user;
-	private PersonControl pc;
-
-	private void setInfo()
+	public void saveEdit()
 	{
-		nameField.setText(user.getName());
-		addrField.setText(user.getAddress());
-		phoneField.setText(user.getPhone());
-		emailField.setText(user.getEmail());
-		userField.setText(user.getUser());
+		Person p = new Person(
+				addrField.getText(),
+				nameField.getText(),
+				phoneField.getText(),
+				emailField.getText(),
+				userField.getText(),
+				person.getPass()
+				);
+		p.setPersonID(person.getPersonID());
+
+		personCRUD.update(p);
 	}
 	
+	void setData()
+	{
+		nameField.setText(person.getName());
+		addrField.setText(person.getAddress());
+		phoneField.setText(person.getPhone());
+		emailField.setText(person.getEmail());
+		userField.setText(person.getUser());
+	}
+
 	public EditData(Person p) {
-		user = p;
+		person = p;
 		
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 450, 300);
@@ -50,14 +61,14 @@ public class EditData extends JFrame {
 		JButton saveButton = new JButton("Save");
 		saveButton.setBounds(335, 11, 89, 23);
 		saveButton.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent arg0) {
-				Person p = new Person(addrField.getText(),nameField.getText(),phoneField.getText(),emailField.getText(),userField.getText(),user.getPass());
-				pc.edit(p);
-				user = pc.getPerson(user);
+			public void actionPerformed(ActionEvent e)
+			{
+				saveEdit();
 				setVisible(false);
-				new PersonView(user).setVisible(true);
+				PersonView personView = new PersonView();
+				personView.setData(person.getUser(), person.getPass());
+				personView.setVisible(true);
 			}
-			
 		});
 		contentPane.add(saveButton);
 		
@@ -105,8 +116,6 @@ public class EditData extends JFrame {
 		userField.setBounds(68, 114, 86, 20);
 		contentPane.add(userField);
 		userField.setColumns(10);
-		
-		setInfo();
 	}
 
 }

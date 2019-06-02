@@ -58,8 +58,6 @@ public class Car {
 		this.person = person;
 	}
 	
-	public String toString()
-	{
-		return carID + " " + model + " " + year;
-	}
+	
+
 }

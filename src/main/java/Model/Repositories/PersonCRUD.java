@@ -1,13 +1,9 @@
 package Model.Repositories;
 
-import java.util.List;
-
-import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.cfg.AnnotationConfiguration;
 
-import Model.Entities.Parking;
 import Model.Entities.Person;
 
 
@@ -27,16 +23,7 @@ public class PersonCRUD implements MasterInterface<Person, Integer>{
 		session.close();
 		
 	}
-	
-	@SuppressWarnings("unchecked")
-	public List<Person> selectAll(){
-		session = sessionFactory.openSession();
-		
-		Query q = session.createQuery("SELECT * FROM Person");
-		List<Person> a = q.list();
-		return a;
-	}
-	
+
 	public Person read(Integer idObiect) {
 		Person p;
 		
@@ -51,7 +38,7 @@ public class PersonCRUD implements MasterInterface<Person, Integer>{
 	}
 
 	public void update(Person obiect) {
-		System.out.println("Updating student...");
+		System.out.println("Updating person...");
 		session = sessionFactory.openSession();
 		
 		Person p = (Person) session.get(Person.class, obiect.getPersonID());

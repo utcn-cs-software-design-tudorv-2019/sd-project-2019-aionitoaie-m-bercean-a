@@ -1,13 +1,9 @@
 package Model.Repositories;
 
-import java.util.List;
-
-import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.cfg.AnnotationConfiguration;
 
-import Model.Entities.Admin;
 import Model.Entities.Parking;
 import Model.Entities.Plot;
 
@@ -27,16 +23,7 @@ public class ParkingCRUD implements MasterInterface<Parking, Integer>{
 		session.close();
 		
 	}
-	
-	@SuppressWarnings("unchecked")
-	public List<Parking> selectAll(){
-		session = sessionFactory.openSession();
-		
-		Query q = session.createQuery("SELECT * FROM Parking");
-		List<Parking> a = q.list();
-		return a;
-	}
-	
+
 	public Parking read(Integer idObiect) {
 		Parking p;
 		

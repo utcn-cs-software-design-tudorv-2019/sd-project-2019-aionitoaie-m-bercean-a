@@ -1,8 +1,5 @@
 package Model.Repositories;
 
-import java.util.List;
-
-import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.cfg.AnnotationConfiguration;
@@ -27,16 +24,7 @@ public class PlotDetailCRUD implements MasterInterface<PlotDetail, Integer>{
 		session.close();
 		
 	}
-	
-	@SuppressWarnings("unchecked")
-	public List<PlotDetail> selectAll(){
-		session = sessionFactory.openSession();
-		
-		Query q = session.createQuery("SELECT * FROM PlotDetail");
-		List<PlotDetail> a = q.list();
-		return a;
-	}
-	
+
 	public PlotDetail read(Integer idObiect) {
 		PlotDetail p;
 		

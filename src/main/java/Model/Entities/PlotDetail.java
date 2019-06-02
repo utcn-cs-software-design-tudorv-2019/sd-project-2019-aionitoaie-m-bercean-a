@@ -20,6 +20,7 @@ public class PlotDetail {
 	private int startHour;
 	private int endHour;
 	private boolean occupied;
+	private String carName;
 	
 	
 	@ManyToOne(cascade = {CascadeType.ALL})
@@ -33,12 +34,22 @@ public class PlotDetail {
 		endHour = end;
 		occupied = state;
 	}
+	
+	public PlotDetail() {}
 
 
 	public int getDate() {
 		return date;
 	}
 
+
+	public String getCarName() {
+		return carName;
+	}
+
+	public void setCarName(String carName) {
+		this.carName = carName;
+	}
 
 	public void setDate(int date) {
 		this.date = date;

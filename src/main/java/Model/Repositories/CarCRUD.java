@@ -1,13 +1,9 @@
 package Model.Repositories;
 
-import java.util.List;
-
-import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.cfg.AnnotationConfiguration;
 
-import Model.Entities.Admin;
 import Model.Entities.Car;
 
 public class CarCRUD implements MasterInterface<Car, Integer>{
@@ -26,16 +22,7 @@ public class CarCRUD implements MasterInterface<Car, Integer>{
 		session.close();
 		
 	}
-	
-	@SuppressWarnings("unchecked")
-	public List<Car> selectAll(){
-		session = sessionFactory.openSession();
-		
-		Query q = session.createQuery("SELECT * FROM Car");
-		List<Car> a = q.list();
-		return a;
-	}
-	
+
 	public Car read(Integer idObiect) {
 		Car c;
 		

@@ -9,9 +9,10 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
-import Control.CarControl;
+import Control.UserBLL;
 import Model.Entities.Car;
 import Model.Entities.Person;
+import Model.Repositories.CarCRUD;
 
 import javax.swing.JTextField;
 import javax.swing.JLabel;
@@ -22,12 +23,23 @@ public class AddCar extends JFrame {
 	private JPanel contentPane;
 	private JTextField nameField;
 	private JTextField yearField;
-	private CarControl cC = new CarControl();
-	private Person user;
+	Person person;
+	CarCRUD carCRUD = new CarCRUD();
+	UserBLL uBLL = new UserBLL();
+	
+	public void registerCarToPerson(Person p)
+	{
+		Car c = new Car(nameField.getText(), Integer.parseInt(yearField.getText()));
+		c.setPerson(p);
+		
+		carCRUD.create(c);
+	}
 
 
 	public AddCar(Person p) {
-		user = p;
+		
+		this.person = p;
+		
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 450, 300);
 		contentPane = new JPanel();
@@ -56,14 +68,14 @@ public class AddCar extends JFrame {
 		JButton btnRegister = new JButton("Register ");
 		btnRegister.setBounds(165, 185, 89, 23);
 		btnRegister.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent arg0) {
-				Car c = new Car(nameField.getText(),Integer.parseInt(yearField.getText()));
-				c.setPerson(user);
-				cC.register(c);
+			public void actionPerformed(ActionEvent e)
+			{
+				registerCarToPerson(person);
 				setVisible(false);
-				new PersonView(user).setVisible(true);
+				PersonView pv = new PersonView();
+				pv.setData(person.getUser(),person.getPass());
+				pv.setVisible(true);
 			}
-			
 		});
 		contentPane.add(btnRegister);
 	}
